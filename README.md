@@ -1,4 +1,4 @@
-# sankskrit
+# sanskrit
 The purpose of this repo is to build an app to help one self-learn Sanskrit.
 
 Features
