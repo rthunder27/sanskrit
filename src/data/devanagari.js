@@ -6,8 +6,9 @@
  * English pronunciation hint, and an example Sanskrit word that uses the
  * character along with its meaning.
  *
- * This starter set covers the independent vowels. Consonants and other
- * character groups can be appended as additional arrays/entries later.
+ * Currently covers the independent vowels and the 33 consonants. Other
+ * character groups (e.g. conjuncts) can be appended as additional
+ * arrays/entries later.
  */
 
 /**
@@ -92,10 +93,214 @@ export const vowels = [
 ]
 
 /**
+/** @type {FlashcardEntry[]} */
+export const consonants = [
+  {
+    character: 'क',
+    transliteration: 'ka',
+    pronunciation: "like 'k' in 'skate'",
+    example: { word: 'कमल', transliteration: 'kamala', meaning: 'lotus' },
+  },
+  {
+    character: 'ख',
+    transliteration: 'kha',
+    pronunciation: "an aspirated 'k', like 'k' in 'kite'",
+    example: { word: 'खग', transliteration: 'khaga', meaning: 'bird' },
+  },
+  {
+    character: 'ग',
+    transliteration: 'ga',
+    pronunciation: "like 'g' in 'go'",
+    example: { word: 'गज', transliteration: 'gaja', meaning: 'elephant' },
+  },
+  {
+    character: 'घ',
+    transliteration: 'gha',
+    pronunciation: "an aspirated 'g'",
+    example: { word: 'घण्टा', transliteration: 'ghaṇṭā', meaning: 'bell' },
+  },
+  {
+    character: 'ङ',
+    transliteration: 'ṅa',
+    pronunciation: "like 'ng' in 'sing'",
+    example: { word: 'रङ्ग', transliteration: 'raṅga', meaning: 'color' },
+  },
+  {
+    character: 'च',
+    transliteration: 'ca',
+    pronunciation: "like 'ch' in 'chair'",
+    example: { word: 'चन्द्र', transliteration: 'candra', meaning: 'moon' },
+  },
+  {
+    character: 'छ',
+    transliteration: 'cha',
+    pronunciation: "an aspirated 'ch'",
+    example: { word: 'छाया', transliteration: 'chāyā', meaning: 'shadow' },
+  },
+  {
+    character: 'ज',
+    transliteration: 'ja',
+    pronunciation: "like 'j' in 'jar'",
+    example: { word: 'जल', transliteration: 'jala', meaning: 'water' },
+  },
+  {
+    character: 'झ',
+    transliteration: 'jha',
+    pronunciation: "an aspirated 'j'",
+    example: { word: 'झष', transliteration: 'jhaṣa', meaning: 'fish' },
+  },
+  {
+    character: 'ञ',
+    transliteration: 'ña',
+    pronunciation: "like 'ny' in 'canyon'",
+    example: { word: 'पञ्च', transliteration: 'pañca', meaning: 'five' },
+  },
+  {
+    character: 'ट',
+    transliteration: 'ṭa',
+    pronunciation: "a retroflex 't', tongue curled back",
+    example: { word: 'टीका', transliteration: 'ṭīkā', meaning: 'commentary' },
+  },
+  {
+    character: 'ठ',
+    transliteration: 'ṭha',
+    pronunciation: "an aspirated retroflex 't'",
+    example: { word: 'पाठ', transliteration: 'pāṭha', meaning: 'lesson' },
+  },
+  {
+    character: 'ड',
+    transliteration: 'ḍa',
+    pronunciation: "a retroflex 'd', tongue curled back",
+    example: { word: 'डमरु', transliteration: 'ḍamaru', meaning: 'small hand drum' },
+  },
+  {
+    character: 'ढ',
+    transliteration: 'ḍha',
+    pronunciation: "an aspirated retroflex 'd'",
+    example: { word: 'ढाल', transliteration: 'ḍhāla', meaning: 'shield' },
+  },
+  {
+    character: 'ण',
+    transliteration: 'ṇa',
+    pronunciation: "a retroflex 'n', tongue curled back",
+    example: { word: 'गणेश', transliteration: 'gaṇeśa', meaning: 'Ganesha' },
+  },
+  {
+    character: 'त',
+    transliteration: 'ta',
+    pronunciation: "a dental 't', tongue against the teeth",
+    example: { word: 'तल', transliteration: 'tala', meaning: 'surface' },
+  },
+  {
+    character: 'थ',
+    transliteration: 'tha',
+    pronunciation: "an aspirated dental 't'",
+    example: { word: 'स्थान', transliteration: 'sthāna', meaning: 'place' },
+  },
+  {
+    character: 'द',
+    transliteration: 'da',
+    pronunciation: "a dental 'd', tongue against the teeth",
+    example: { word: 'दिन', transliteration: 'dina', meaning: 'day' },
+  },
+  {
+    character: 'ध',
+    transliteration: 'dha',
+    pronunciation: "an aspirated dental 'd'",
+    example: { word: 'धन', transliteration: 'dhana', meaning: 'wealth' },
+  },
+  {
+    character: 'न',
+    transliteration: 'na',
+    pronunciation: "like 'n' in 'name'",
+    example: { word: 'नाम', transliteration: 'nāma', meaning: 'name' },
+  },
+  {
+    character: 'प',
+    transliteration: 'pa',
+    pronunciation: "like 'p' in 'spin'",
+    example: { word: 'पुष्प', transliteration: 'puṣpa', meaning: 'flower' },
+  },
+  {
+    character: 'फ',
+    transliteration: 'pha',
+    pronunciation: "an aspirated 'p', like 'p' in 'pin'",
+    example: { word: 'फल', transliteration: 'phala', meaning: 'fruit' },
+  },
+  {
+    character: 'ब',
+    transliteration: 'ba',
+    pronunciation: "like 'b' in 'bun'",
+    example: { word: 'बल', transliteration: 'bala', meaning: 'strength' },
+  },
+  {
+    character: 'भ',
+    transliteration: 'bha',
+    pronunciation: "an aspirated 'b'",
+    example: { word: 'भूमि', transliteration: 'bhūmi', meaning: 'earth' },
+  },
+  {
+    character: 'म',
+    transliteration: 'ma',
+    pronunciation: "like 'm' in 'mother'",
+    example: { word: 'मन', transliteration: 'mana', meaning: 'mind' },
+  },
+  {
+    character: 'य',
+    transliteration: 'ya',
+    pronunciation: "like 'y' in 'yes'",
+    example: { word: 'योग', transliteration: 'yoga', meaning: 'union' },
+  },
+  {
+    character: 'र',
+    transliteration: 'ra',
+    pronunciation: "a rolled/tapped 'r'",
+    example: { word: 'राम', transliteration: 'rāma', meaning: 'Rama' },
+  },
+  {
+    character: 'ल',
+    transliteration: 'la',
+    pronunciation: "like 'l' in 'love'",
+    example: { word: 'लता', transliteration: 'latā', meaning: 'vine' },
+  },
+  {
+    character: 'व',
+    transliteration: 'va',
+    pronunciation: "between 'v' and 'w'",
+    example: { word: 'वायु', transliteration: 'vāyu', meaning: 'wind' },
+  },
+  {
+    character: 'श',
+    transliteration: 'śa',
+    pronunciation: "like 'sh' in 'shine'",
+    example: { word: 'शिव', transliteration: 'śiva', meaning: 'Shiva' },
+  },
+  {
+    character: 'ष',
+    transliteration: 'ṣa',
+    pronunciation: "a retroflex 'sh'",
+    example: { word: 'षट्', transliteration: 'ṣaṭ', meaning: 'six' },
+  },
+  {
+    character: 'स',
+    transliteration: 'sa',
+    pronunciation: "like 's' in 'sun'",
+    example: { word: 'सूर्य', transliteration: 'sūrya', meaning: 'sun' },
+  },
+  {
+    character: 'ह',
+    transliteration: 'ha',
+    pronunciation: "like 'h' in 'house'",
+    example: { word: 'हृदय', transliteration: 'hṛdaya', meaning: 'heart' },
+  },
+]
+
+/**
  * All flashcard decks, keyed by name. The flashcard deck UI can use this to
  * let the user pick which set of characters to study.
  * @type {Record<string, FlashcardEntry[]>}
  */
 export const decks = {
   vowels,
+  consonants,
 }

@@ -7,3 +7,12 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+.deck-selector {
+  display: flex;
+  gap: 1rem;
+}
+
+.deck-selector__button--active {
+  border-color: #646cff;
+}
