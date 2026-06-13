@@ -1,0 +1,84 @@
+.flashcard {
+  width: 320px;
+  height: 220px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flashcard__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flashcard--flipped .flashcard__inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid #444;
+  backface-visibility: hidden;
+  padding: 1rem;
+  text-align: center;
+}
+
+.flashcard__face--front {
+  background-color: #1a1a1a;
+}
+
+.flashcard__face--back {
+  background-color: #1a1a1a;
+  transform: rotateY(180deg);
+}
+
+.flashcard__character {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.flashcard__transliteration {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.flashcard__pronunciation {
+  font-style: italic;
+  color: #aaa;
+}
+
+.flashcard__example {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.flashcard__example-word {
+  font-size: 1.5rem;
+}
+
+.flashcard__example-translit {
+  color: #aaa;
+}
+
+.flashcard__example-meaning {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .flashcard__face--front,
+  .flashcard__face--back {
+    background-color: #f9f9f9;
+    border-color: #ddd;
+  }
+}

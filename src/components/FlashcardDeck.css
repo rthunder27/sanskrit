@@ -1,0 +1,17 @@
+.flashcard-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.flashcard-deck__controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flashcard-deck__counter {
+  min-width: 4rem;
+  text-align: center;
+}
