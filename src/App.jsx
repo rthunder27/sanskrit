@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FlashcardDeck from './components/FlashcardDeck'
 import FlashcardQuiz from './components/FlashcardQuiz'
+import ReferenceChart from './components/ReferenceChart'
 import { decks } from './data/devanagari'
 import './App.css'
 
@@ -14,15 +15,16 @@ const deckLabels = {
 /**
  * App
  *
- * Top-level component. Lets the user pick a deck and switch between two modes:
+ * Top-level component. Lets the user pick a deck and switch between three modes:
  * - Browse: step through cards in order (or shuffled) with Previous/Next.
  * - Quiz:   swipe-based review queue — right to mark correct, left to retry.
+ * - Chart:  static grid of all characters with transliterations for quick reference.
  *
  * Switching decks always resets back to Browse mode.
  */
 function App() {
   const [deckKey, setDeckKey] = useState('vowels')
-  const [mode, setMode] = useState('browse') // 'browse' | 'quiz'
+  const [mode, setMode] = useState('browse') // 'browse' | 'quiz' | 'chart'
 
   const switchDeck = (key) => {
     setDeckKey(key)
@@ -58,13 +60,17 @@ function App() {
         >
           Quiz
         </button>
+        <button
+          className={mode === 'chart' ? 'mode-selector__button--active' : ''}
+          onClick={() => setMode('chart')}
+        >
+          Chart
+        </button>
       </div>
 
-      {mode === 'browse' ? (
-        <FlashcardDeck key={deckKey} entries={decks[deckKey]} />
-      ) : (
-        <FlashcardQuiz key={deckKey} entries={decks[deckKey]} onExit={() => setMode('browse')} />
-      )}
+      {mode === 'browse' && <FlashcardDeck key={deckKey} entries={decks[deckKey]} />}
+      {mode === 'quiz' && <FlashcardQuiz key={deckKey} entries={decks[deckKey]} onExit={() => setMode('browse')} />}
+      {mode === 'chart' && <ReferenceChart entries={decks[deckKey]} />}
     </div>
   )
 }
