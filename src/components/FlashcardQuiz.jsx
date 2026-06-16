@@ -16,6 +16,8 @@ const DRAG_THRESHOLD = 8
  * - Swipe right (or click "Got it") to mark the card correct and remove it.
  * - Swipe left  (or click "Missed") to mark it wrong and move it to the back
  *   of the queue for another attempt.
+ * - Shuffle randomises the remaining queue in place.
+ * - Reset restores all cards in their original order.
  *
  * Animation: the current card slides off-screen (clipped by overflow:hidden on
  * the stage), then the next card fades in from the centre. The fade-in is
@@ -38,6 +40,27 @@ function FlashcardQuiz({ entries, onExit }) {
 
   const startXRef = useRef(null)
   const hasDraggedRef = useRef(false)
+
+  /** Randomise the remaining queue using Fisher-Yates. */
+  const handleShuffle = () => {
+    if (flyingOut) return
+    const copy = [...queue]
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[copy[i], copy[j]] = [copy[j], copy[i]]
+    }
+    setQueue(copy)
+    setFlipped(false)
+    setDragX(0)
+  }
+
+  /** Restore all cards in their original order. */
+  const handleReset = () => {
+    if (flyingOut) return
+    setQueue([...entries])
+    setFlipped(false)
+    setDragX(0)
+  }
 
   /** Animate the current card off-screen in `direction`, then update the queue. */
   const handleSwipe = (direction) => {
@@ -168,6 +191,11 @@ function FlashcardQuiz({ entries, onExit }) {
         <button className="flashcard-quiz__btn--right" onClick={() => handleSwipe('right')}>
           Got it
         </button>
+      </div>
+
+      <div className="flashcard-quiz__buttons">
+        <button onClick={handleShuffle}>Shuffle</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
 
       <button className="flashcard-quiz__exit" onClick={onExit}>Exit Quiz</button>
