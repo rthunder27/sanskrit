@@ -10,9 +10,16 @@ Perhaps vocab and grammar after exploring these features, definitely 1, probably
 
 ## Progress
 
-- [x] Project scaffolded as a React + Vite web app
-- [x] Devanagari flashcards (feature 1) — vowels and consonants, with a deck
-      selector to switch between them
+- [x] Project scaffolded as a React + Vite web app, deployed to GitHub Pages
+- [x] Devanagari flashcards (feature 1):
+  - Vowels and consonants decks, plus a combined "All" deck
+  - **Browse mode** — step through cards with Previous/Next, flip to reveal,
+    shuffle to randomize order
+  - **Quiz mode** — swipe right if you knew it (removes the card), swipe left
+    if you didn't (moves it to the back for another pass); tap to flip;
+    fallback Missed/Got-it buttons also available
+  - **Chart mode** — static reference grid of all characters with
+    transliterations and pronunciation hints
 - [ ] Touch-screen character drawing practice (feature 2)
 - [ ] Pronunciation practice (feature 3) — planned for a future native
       (e.g. Flutter) rebuild, since it needs microphone/audio APIs
@@ -71,6 +78,8 @@ npm run preview
 - `src/data/devanagari.js` — flashcard content (characters, transliteration,
   pronunciation hints, example words), organized into named decks
 - `src/components/Flashcard.jsx` — single flip card component
-- `src/components/FlashcardDeck.jsx` — deck navigation (previous/next, card
-  counter)
-- `src/App.jsx` — top-level app, deck selector
+- `src/components/FlashcardDeck.jsx` — Browse mode: deck navigation with
+  previous/next and shuffle
+- `src/components/FlashcardQuiz.jsx` — Quiz mode: swipe-based review queue
+- `src/components/ReferenceChart.jsx` — Chart mode: static character grid
+- `src/App.jsx` — top-level app, deck selector, mode switcher
