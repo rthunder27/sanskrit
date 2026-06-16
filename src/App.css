@@ -16,3 +16,12 @@
 .deck-selector__button--active {
   border-color: #646cff;
 }
+
+.mode-selector {
+  display: flex;
+  gap: 1rem;
+}
+
+.mode-selector__button--active {
+  border-color: #646cff;
+}

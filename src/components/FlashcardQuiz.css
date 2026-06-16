@@ -1,0 +1,84 @@
+.flashcard-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.flashcard-quiz__progress {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Row that holds the Wrong label, card, and Right label side by side. */
+.flashcard-quiz__stage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: grab;
+}
+
+.flashcard-quiz__stage:active {
+  cursor: grabbing;
+}
+
+.flashcard-quiz__label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-width: 3rem;
+  text-align: center;
+  border: 2px solid;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.flashcard-quiz__label--wrong {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.flashcard-quiz__label--right {
+  color: #38a169;
+  border-color: #38a169;
+}
+
+.flashcard-quiz__hint {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+  text-align: center;
+}
+
+/* Fallback tap buttons for users who prefer them over swiping. */
+.flashcard-quiz__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.flashcard-quiz__btn--wrong {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.flashcard-quiz__btn--right {
+  color: #38a169;
+  border-color: #38a169;
+}
+
+.flashcard-quiz__exit {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.flashcard-quiz__done-message {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.flashcard-quiz__done-controls {
+  display: flex;
+  gap: 1rem;
+}
