@@ -18,7 +18,8 @@ Perhaps vocab and grammar after exploring these features, definitely 1, probably
   - **Quiz mode** — swipe right if you knew it (removes the card), swipe left
     if you didn't (moves it to the back for another pass); tap to flip;
     fallback Missed/Got-it buttons also available; card clips off-screen on
-    swipe and new card fades in from centre
+    swipe and new card fades in from centre; Shuffle and Reset buttons to
+    randomise the remaining queue or restore all cards in original order
   - **Chart mode** — structured reference grid: vowels split into simple
     vowels and diphthongs; consonants in labeled varga rows (Gutturals,
     Palatals, Retroflexes, Dentals, Labials) with Semivowels and Sibilants
