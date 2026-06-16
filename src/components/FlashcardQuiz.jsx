@@ -17,6 +17,11 @@ const DRAG_THRESHOLD = 8
  * - Swipe left  (or click "Missed") to mark it wrong and move it to the back
  *   of the queue for another attempt.
  *
+ * Animation: the current card slides off-screen (clipped by overflow:hidden on
+ * the stage), then the next card fades in from the centre. The fade-in is
+ * driven by a CSS keyframe animation triggered whenever the card's React key
+ * changes (i.e. a new card appears at queue[0]).
+ *
  * When the queue empties the user sees a completion screen with a restart option.
  *
  * @param {Object} props
@@ -97,11 +102,11 @@ function FlashcardQuiz({ entries, onExit }) {
   }
 
   const translateX = flyingOut === 'right'
-    ? '130%'
+    ? '160%'
     : flyingOut === 'left'
-    ? '-130%'
+    ? '-160%'
     : `${dragX}px`
-  const rotation = (flyingOut ? (flyingOut === 'right' ? 1 : -1) * 130 : dragX) * 0.08
+  const rotation = (flyingOut ? (flyingOut === 'right' ? 1 : -1) * 160 : dragX) * 0.08
   const cardStyle = {
     transform: `translateX(${translateX}) rotate(${rotation}deg)`,
     transition: dragging && !flyingOut ? 'none' : 'transform 0.3s ease',
@@ -118,6 +123,23 @@ function FlashcardQuiz({ entries, onExit }) {
         {total - queue.length} / {total} done · {queue.length} remaining
       </p>
 
+      {/* Labels sit above the card so they're never occluded by it sliding. */}
+      <div className="flashcard-quiz__labels">
+        <span
+          className="flashcard-quiz__label flashcard-quiz__label--wrong"
+          style={{ opacity: wrongOpacity }}
+        >
+          Wrong
+        </span>
+        <span
+          className="flashcard-quiz__label flashcard-quiz__label--right"
+          style={{ opacity: rightOpacity }}
+        >
+          Right
+        </span>
+      </div>
+
+      {/* overflow:hidden clips the card as it exits; pointer events live here. */}
       <div
         className="flashcard-quiz__stage"
         onPointerDown={onPointerDown}
@@ -125,23 +147,16 @@ function FlashcardQuiz({ entries, onExit }) {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerCancel}
       >
-        <span
-          className="flashcard-quiz__label flashcard-quiz__label--wrong"
-          style={{ opacity: wrongOpacity }}
-        >
-          Wrong
-        </span>
-
-        <div style={cardStyle}>
-          <Flashcard entry={queue[0]} flipped={flipped} onFlip={() => {}} />
+        {/*
+          key={queue[0].character} causes React to remount this div whenever a
+          new card reaches the front of the queue, which restarts the CSS entry
+          animation so the incoming card fades in from the centre.
+        */}
+        <div key={queue[0].character} className="flashcard-quiz__card-enter">
+          <div style={cardStyle}>
+            <Flashcard entry={queue[0]} flipped={flipped} onFlip={() => {}} />
+          </div>
         </div>
-
-        <span
-          className="flashcard-quiz__label flashcard-quiz__label--right"
-          style={{ opacity: rightOpacity }}
-        >
-          Right
-        </span>
       </div>
 
       <p className="flashcard-quiz__hint">Tap to flip &middot; swipe right if you knew it &middot; swipe left if you didn&apos;t</p>

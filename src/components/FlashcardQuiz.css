@@ -11,27 +11,20 @@
   margin: 0;
 }
 
-/* Row that holds the Wrong label, card, and Right label side by side. */
-.flashcard-quiz__stage {
+/* Wrong / Right labels above the card so the sliding card never covers them. */
+.flashcard-quiz__labels {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: grab;
-}
-
-.flashcard-quiz__stage:active {
-  cursor: grabbing;
+  justify-content: space-between;
+  width: 320px;
+  pointer-events: none;
 }
 
 .flashcard-quiz__label {
   font-size: 1.1rem;
   font-weight: 700;
-  min-width: 3rem;
-  text-align: center;
   border: 2px solid;
   border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-  pointer-events: none;
+  padding: 0.25rem 0.6rem;
   transition: opacity 0.1s;
 }
 
@@ -43,6 +36,35 @@
 .flashcard-quiz__label--right {
   color: #38a169;
   border-color: #38a169;
+}
+
+/*
+ * Clips the card as it exits. Fixed height prevents layout shifts while the
+ * card is mid-animation. Pointer events live here so drag tracking works
+ * even when the card is partially outside its natural bounds.
+ */
+.flashcard-quiz__stage {
+  width: 320px;
+  height: 230px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+
+.flashcard-quiz__stage:active {
+  cursor: grabbing;
+}
+
+/* Entry animation: new card fades in from centre after the previous one exits. */
+@keyframes card-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.flashcard-quiz__card-enter {
+  animation: card-enter 0.25s ease-out;
 }
 
 .flashcard-quiz__hint {
