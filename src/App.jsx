@@ -2,7 +2,7 @@ import { useState } from 'react'
 import FlashcardDeck from './components/FlashcardDeck'
 import FlashcardQuiz from './components/FlashcardQuiz'
 import ReferenceChart from './components/ReferenceChart'
-import { decks } from './data/devanagari'
+import { decks, deckGroups } from './data/devanagari'
 import './App.css'
 
 /** Human-readable labels for each deck key in `decks`. */
@@ -69,7 +69,7 @@ function App() {
 
       {mode === 'browse' && <FlashcardDeck key={deckKey} entries={decks[deckKey]} />}
       {mode === 'quiz' && <FlashcardQuiz key={deckKey} entries={decks[deckKey]} onExit={() => setMode('browse')} />}
-      {mode === 'chart' && <ReferenceChart entries={decks[deckKey]} />}
+      {mode === 'chart' && <ReferenceChart groups={deckGroups[deckKey]} />}
     </div>
   )
 }

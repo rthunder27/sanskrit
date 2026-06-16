@@ -307,3 +307,39 @@ export const decks = {
   consonants,
   all,
 }
+
+/**
+ * @typedef {Object} CharGroup
+ * @property {string} label - Display name for this group.
+ * @property {FlashcardEntry[]} entries - Characters in the group.
+ * @property {boolean} [paired] - When true, this group is displayed side-by-side
+ *   with adjacent paired groups in the reference chart.
+ */
+
+/**
+ * Consonants organised into their traditional Sanskrit grammatical groups
+ * (vargas). The last two groups are marked `paired` so the chart can render
+ * them side-by-side rather than as separate full-width rows.
+ * @type {CharGroup[]}
+ */
+export const consonantGroups = [
+  { label: 'Gutturals',   entries: consonants.slice(0, 5) },
+  { label: 'Palatals',    entries: consonants.slice(5, 10) },
+  { label: 'Retroflexes', entries: consonants.slice(10, 15) },
+  { label: 'Dentals',     entries: consonants.slice(15, 20) },
+  { label: 'Labials',     entries: consonants.slice(20, 25) },
+  { label: 'Semivowels',  entries: consonants.slice(25, 29), paired: true },
+  { label: 'Sibilants',   entries: consonants.slice(29, 33), paired: true },
+]
+
+/**
+ * Groups to use in the reference chart for each deck. Vowels are a single
+ * unlabelled group; consonants use the structured varga grouping; all
+ * combines both.
+ * @type {Record<string, CharGroup[]>}
+ */
+export const deckGroups = {
+  vowels: [{ label: 'Vowels', entries: vowels }],
+  consonants: consonantGroups,
+  all: [{ label: 'Vowels', entries: vowels }, ...consonantGroups],
+}
