@@ -20,7 +20,7 @@ const deckLabels = {
  * - Quiz:   swipe-based review queue — right to mark correct, left to retry.
  * - Chart:  static grid of all characters with transliterations for quick reference.
  *
- * Switching decks always resets back to Browse mode.
+ * Switching decks resets the card position but keeps the current mode.
  */
 function App() {
   const [deckKey, setDeckKey] = useState('vowels')
@@ -28,7 +28,6 @@ function App() {
 
   const switchDeck = (key) => {
     setDeckKey(key)
-    setMode('browse')
   }
 
   return (
