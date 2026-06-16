@@ -333,13 +333,23 @@ export const consonantGroups = [
 ]
 
 /**
- * Groups to use in the reference chart for each deck. Vowels are a single
- * unlabelled group; consonants use the structured varga grouping; all
- * combines both.
+ * Vowels split into their two traditional categories.
+ * Simple vowels (अ–ऋ) come first, diphthongs (ए–औ) second.
+ * @type {CharGroup[]}
+ */
+export const vowelGroups = [
+  { label: 'Simple vowels', entries: vowels.slice(0, 7) },
+  { label: 'Diphthongs',    entries: vowels.slice(7) },
+]
+
+/**
+ * Groups to use in the reference chart for each deck.
+ * Vowels are split into simple/diphthong rows; consonants use the structured
+ * varga grouping; all combines both.
  * @type {Record<string, CharGroup[]>}
  */
 export const deckGroups = {
-  vowels: [{ label: 'Vowels', entries: vowels }],
+  vowels: vowelGroups,
   consonants: consonantGroups,
-  all: [{ label: 'Vowels', entries: vowels }, ...consonantGroups],
+  all: [...vowelGroups, ...consonantGroups],
 }
