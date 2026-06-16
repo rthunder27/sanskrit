@@ -92,7 +92,6 @@ export const vowels = [
   },
 ]
 
-/**
 /** @type {FlashcardEntry[]} */
 export const consonants = [
   {
@@ -295,6 +294,9 @@ export const consonants = [
   },
 ]
 
+/** All vowels followed by all consonants, for a combined study session. @type {FlashcardEntry[]} */
+export const all = [...vowels, ...consonants]
+
 /**
  * All flashcard decks, keyed by name. The flashcard deck UI can use this to
  * let the user pick which set of characters to study.
@@ -303,4 +305,5 @@ export const consonants = [
 export const decks = {
   vowels,
   consonants,
+  all,
 }
