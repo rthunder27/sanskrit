@@ -181,15 +181,16 @@ class _QuizScreenState extends State<QuizScreen> {
             width: 320,
             height: 230,
             child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onPanStart: _onPanStart,
               onPanUpdate: _onPanUpdate,
               onPanEnd: _onPanEnd,
               child: AnimatedContainer(
+                alignment: Alignment.center,
                 duration: (_dragging || _skipTransition) && _flyingOut == null
                     ? Duration.zero
                     : const Duration(milliseconds: 300),
-                transform: Matrix4.identity()
-                  ..translateByDouble(translateX, 0.0, 0.0, 1.0)
+                transform: Matrix4.translationValues(translateX, 0, 0)
                   ..rotateZ(rotation),
                 transformAlignment: Alignment.center,
                 // Key on the entry forces a widget rebuild (and thus a fade-in

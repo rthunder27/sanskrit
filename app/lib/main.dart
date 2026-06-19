@@ -10,6 +10,8 @@ import 'screens/quiz_screen.dart';
 import 'screens/chart_screen.dart';
 import 'screens/review_screen.dart';
 
+const String appBuildId = '20250619d';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDatabase();
@@ -27,6 +29,14 @@ class SanskritApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7C4DFF)),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF7C4DFF),
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.system,
       home: const _HomeShell(),
     );
   }
@@ -68,6 +78,13 @@ class _HomeShellState extends State<_HomeShell> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sanskrit'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: Text(appBuildId,
+                style: TextStyle(fontSize: 10, color: Colors.grey[500])),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(48),
           child: _DeckSelector(

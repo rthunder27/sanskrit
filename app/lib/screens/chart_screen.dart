@@ -73,8 +73,8 @@ class _GroupBlock extends StatelessWidget {
                 ?.copyWith(color: Colors.grey[600])),
         const SizedBox(height: 4),
         Wrap(
-          spacing: 4,
-          runSpacing: 4,
+          spacing: 6,
+          runSpacing: 6,
           children: group.entries.map((e) => _CharCell(entry: e)).toList(),
         ),
       ],
@@ -96,18 +96,18 @@ class _CharCell extends StatelessWidget {
     return Tooltip(
       message: '${entry.transliteration} — ${entry.pronunciation}',
       child: Container(
-        width: 48,
-        height: 48,
+        width: 64,
+        height: 64,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[300]!),
-          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: Theme.of(context).dividerColor),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(entry.character, style: const TextStyle(fontSize: 20)),
+            Text(entry.character, style: const TextStyle(fontSize: 28)),
             Text(entry.transliteration,
-                style: const TextStyle(fontSize: 9, color: Colors.grey)),
+                style: const TextStyle(fontSize: 13, color: Colors.grey)),
           ],
         ),
       ),

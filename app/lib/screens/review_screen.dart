@@ -178,80 +178,80 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final wrongOpacity = _flipped ? ((-_dragX) / _swipeThreshold).clamp(0.0, 1.0) : 0.0;
     final rightOpacity = _flipped ? (_dragX / _swipeThreshold).clamp(0.0, 1.0) : 0.0;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Review — $progress',
-            style: Theme.of(context).textTheme.bodySmall),
-        const SizedBox(height: 8),
-        SizedBox(
-          width: 320,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Opacity(
-                opacity: wrongOpacity,
-                child: const Text('No',
-                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-              ),
-              Opacity(
-                opacity: rightOpacity,
-                child: const Text('Yes',
-                    style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 4),
-        ClipRect(
-          child: SizedBox(
-            width: 320,
-            height: 230,
-            child: Center(
-              child: GestureDetector(
-                onPanStart: _onPanStart,
-                onPanUpdate: _onPanUpdate,
-                onPanEnd: _onPanEnd,
-                child: AnimatedContainer(
-                  duration: (_dragging || _skipTransition) && _flyingOut == null
-                      ? Duration.zero
-                      : const Duration(milliseconds: 300),
-                  transform: Matrix4.identity()
-                    ..translateByDouble(translateX, 0.0, 0.0, 1.0)
-                    ..rotateZ(rotation),
-                  transformAlignment: Alignment.center,
-                  child: FlashcardWidget(entry: entry, flipped: _flipped),
+    return Center(
+      child: SizedBox(
+        width: 320,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Review — $progress',
+                style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Opacity(
+                  opacity: wrongOpacity,
+                  child: const Text('No',
+                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                ),
+                Opacity(
+                  opacity: rightOpacity,
+                  child: const Text('Yes',
+                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            ClipRect(
+              child: SizedBox(
+                height: 230,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onPanStart: _onPanStart,
+                  onPanUpdate: _onPanUpdate,
+                  onPanEnd: _onPanEnd,
+                  child: AnimatedContainer(
+                    alignment: Alignment.center,
+                    duration: (_dragging || _skipTransition) && _flyingOut == null
+                        ? Duration.zero
+                        : const Duration(milliseconds: 300),
+                    transform: Matrix4.translationValues(translateX, 0, 0)
+                      ..rotateZ(rotation),
+                    transformAlignment: Alignment.center,
+                    child: FlashcardWidget(entry: entry, flipped: _flipped),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          _flipped
-              ? 'Swipe right = Yes · swipe left = No'
-              : 'Tap to reveal before answering',
-          style: const TextStyle(color: Colors.grey, fontSize: 12),
-        ),
-        const SizedBox(height: 16),
-        if (_flipped)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red[100]),
-                onPressed: () => _swipeAnswer('left'),
-                child: const Text('No'),
+            const SizedBox(height: 8),
+            Text(
+              _flipped
+                  ? 'Swipe right = Yes · swipe left = No'
+                  : 'Tap to reveal before answering',
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            const SizedBox(height: 16),
+            if (_flipped)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red[100]),
+                    onPressed: () => _swipeAnswer('left'),
+                    child: const Text('No'),
+                  ),
+                  const SizedBox(width: 24),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green[100]),
+                    onPressed: () => _swipeAnswer('right'),
+                    child: const Text('Yes'),
+                  ),
+                ],
               ),
-              const SizedBox(width: 24),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green[100]),
-                onPressed: () => _swipeAnswer('right'),
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

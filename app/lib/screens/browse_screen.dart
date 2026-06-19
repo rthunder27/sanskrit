@@ -145,21 +145,20 @@ class _BrowseScreenState extends State<BrowseScreen> {
           child: SizedBox(
             width: 320,
             height: 230,
-            child: Center(
-              child: GestureDetector(
-                onPanStart: _onPanStart,
-                onPanUpdate: _onPanUpdate,
-                onPanEnd: _onPanEnd,
-                child: AnimatedContainer(
-                  duration: (_dragging || _skipTransition) && _flyingOut == null
-                      ? Duration.zero
-                      : const Duration(milliseconds: 300),
-                  transform: Matrix4.identity()
-                    ..translateByDouble(translateX, 0.0, 0.0, 1.0)
-                    ..rotateZ(rotation),
-                  transformAlignment: Alignment.center,
-                  child: FlashcardWidget(entry: entry, flipped: _flipped),
-                ),
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onPanStart: _onPanStart,
+              onPanUpdate: _onPanUpdate,
+              onPanEnd: _onPanEnd,
+              child: AnimatedContainer(
+                alignment: Alignment.center,
+                duration: (_dragging || _skipTransition) && _flyingOut == null
+                    ? Duration.zero
+                    : const Duration(milliseconds: 300),
+                transform: Matrix4.translationValues(translateX, 0, 0)
+                  ..rotateZ(rotation),
+                transformAlignment: Alignment.center,
+                child: FlashcardWidget(entry: entry, flipped: _flipped),
               ),
             ),
           ),
