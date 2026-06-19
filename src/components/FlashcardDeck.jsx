@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Flashcard from './Flashcard'
 import './FlashcardDeck.css'
 
@@ -30,10 +30,19 @@ function shuffle(arr) {
  * @param {Object} props
  * @param {import('../data/devanagari').FlashcardEntry[]} props.entries - The ordered list of cards to study.
  */
+/** Minimum horizontal distance (px) to register as a swipe. */
+const SWIPE_THRESHOLD = 80
+
+/** Minimum movement (px) before a drag starts (avoids eating taps). */
+const DRAG_THRESHOLD = 8
+
 function FlashcardDeck({ entries }) {
   const [displayEntries, setDisplayEntries] = useState(entries)
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
+
+  const startXRef = useRef(null)
+  const hasDraggedRef = useRef(false)
 
   const goTo = (newIndex) => {
     const wrapped = (newIndex + displayEntries.length) % displayEntries.length
@@ -47,13 +56,51 @@ function FlashcardDeck({ entries }) {
     setFlipped(false)
   }
 
+  const onPointerDown = (e) => {
+    e.currentTarget.setPointerCapture(e.pointerId)
+    startXRef.current = e.clientX
+    hasDraggedRef.current = false
+  }
+
+  const onPointerMove = (e) => {
+    if (startXRef.current === null) return
+    if (Math.abs(e.clientX - startXRef.current) > DRAG_THRESHOLD) {
+      hasDraggedRef.current = true
+    }
+  }
+
+  const onPointerUp = (e) => {
+    if (startXRef.current === null) return
+    const delta = e.clientX - startXRef.current
+    startXRef.current = null
+    if (!hasDraggedRef.current) {
+      setFlipped((f) => !f)
+    } else if (Math.abs(delta) > SWIPE_THRESHOLD) {
+      goTo(delta > 0 ? index + 1 : index - 1)
+    }
+  }
+
+  const onPointerCancel = () => {
+    startXRef.current = null
+  }
+
   return (
     <div className="flashcard-deck">
-      <Flashcard
-        entry={displayEntries[index]}
-        flipped={flipped}
-        onFlip={() => setFlipped((f) => !f)}
-      />
+      <div
+        className="flashcard-deck__swipe-area"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
+        style={{ touchAction: 'none', userSelect: 'none' }}
+      >
+        <Flashcard
+          entry={displayEntries[index]}
+          flipped={flipped}
+          onFlip={() => {}}
+        />
+      </div>
+      <p className="flashcard-deck__hint">Tap to flip · swipe to navigate</p>
       <div className="flashcard-deck__controls">
         <button onClick={() => goTo(index - 1)}>Previous</button>
         <span className="flashcard-deck__counter">

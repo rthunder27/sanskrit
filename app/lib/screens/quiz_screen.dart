@@ -27,6 +27,7 @@ class _QuizScreenState extends State<QuizScreen> {
   bool _hasDragged = false;
   double _startX = 0;
   int _total = 0;
+  bool _skipTransition = false;
 
   @override
   void initState() {
@@ -82,6 +83,10 @@ class _QuizScreenState extends State<QuizScreen> {
         _flipped = false;
         _dragX = 0;
         _flyingOut = null;
+        _skipTransition = true;
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() => _skipTransition = false);
       });
     });
   }
@@ -180,7 +185,7 @@ class _QuizScreenState extends State<QuizScreen> {
               onPanUpdate: _onPanUpdate,
               onPanEnd: _onPanEnd,
               child: AnimatedContainer(
-                duration: _dragging && _flyingOut == null
+                duration: (_dragging || _skipTransition) && _flyingOut == null
                     ? Duration.zero
                     : const Duration(milliseconds: 300),
                 transform: Matrix4.identity()

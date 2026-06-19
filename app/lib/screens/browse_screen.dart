@@ -73,10 +73,19 @@ class _BrowseScreenState extends State<BrowseScreen> {
         const SizedBox(height: 16),
         GestureDetector(
           onTap: () => setState(() => _flipped = !_flipped),
+          onHorizontalDragEnd: (details) {
+            final velocity = details.primaryVelocity ?? 0;
+            if (velocity > 300) {
+              _next();
+            } else if (velocity < -300) {
+              _prev();
+            }
+          },
           child: FlashcardWidget(entry: entry, flipped: _flipped),
         ),
         const SizedBox(height: 8),
-        const Text('Tap to flip', style: TextStyle(color: Colors.grey, fontSize: 12)),
+        const Text('Tap to flip · swipe to navigate',
+            style: TextStyle(color: Colors.grey, fontSize: 12)),
         const SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

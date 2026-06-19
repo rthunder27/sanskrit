@@ -10,7 +10,9 @@ import 'screens/quiz_screen.dart';
 import 'screens/chart_screen.dart';
 import 'screens/review_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDatabase();
   runApp(const SanskritApp());
 }
 
@@ -48,11 +50,7 @@ class _HomeShellState extends State<_HomeShell> {
   /// Single database instance shared across screens.
   final AppDatabase _db = AppDatabase();
 
-  @override
-  void dispose() {
-    _db.close();
-    super.dispose();
-  }
+
 
   List<CardEntry> get _entries => deckEntries(_deckKey);
   List<CardGroup> get _groups => deckGroups[_deckKey]!;
@@ -61,7 +59,7 @@ class _HomeShellState extends State<_HomeShell> {
         0 => BrowseScreen(entries: _entries),
         1 => QuizScreen(entries: _entries),
         2 => ChartScreen(groups: _groups),
-        3 => ReviewScreen(allEntries: all, db: _db),
+        3 => ReviewScreen(entries: _entries, db: _db),
         _ => const SizedBox.shrink(),
       };
 

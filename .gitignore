@@ -24,3 +24,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Flutter app build outputs
+app/.dart_tool/
+app/build/

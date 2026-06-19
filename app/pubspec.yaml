@@ -11,19 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  # Type-safe SQLite ORM for local persistence (SRS review history)
-  drift: ^2.23.1
-  sqlite3_flutter_libs: ^0.5.0
+  # Local persistence for SRS review history (pure Dart, no native deps)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   path_provider: ^2.1.0
-  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  # Code generation for drift database classes
-  build_runner: ^2.4.0
-  drift_dev: ^2.23.1
 
 flutter:
   uses-material-design: true
