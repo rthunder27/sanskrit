@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import '../data/devanagari.dart';
 
 class FlashcardWidget extends StatelessWidget {
-  /// The character data to display.
   final CardEntry entry;
-
-  /// Whether the card is showing its back face.
   final bool flipped;
 
   const FlashcardWidget({
@@ -20,35 +17,27 @@ class FlashcardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
-      transitionBuilder: (child, animation) {
-        final rotate = Tween(begin: 1.0, end: 0.0).animate(animation);
-        return AnimatedBuilder(
-          animation: rotate,
-          builder: (_, c) => Transform(
-            transform: Matrix4.rotationY((1 - rotate.value) * 3.14159),
-            alignment: Alignment.center,
-            child: c,
-          ),
-          child: child,
-        );
-      },
-      child: flipped ? _BackFace(entry: entry) : _FrontFace(entry: entry),
+      layoutBuilder: (currentChild, previousChildren) => Stack(
+        alignment: Alignment.center,
+        children: [
+          ...previousChildren,
+          ?currentChild,
+        ],
+      ),
+      child: flipped
+          ? _BackFace(key: const ValueKey('back'), entry: entry)
+          : _FrontFace(key: const ValueKey('front'), entry: entry),
     );
   }
 }
 
-// ---------------------------------------------------------------------------
-// Front face — just the Devanagari character
-// ---------------------------------------------------------------------------
-
 class _FrontFace extends StatelessWidget {
   final CardEntry entry;
-  const _FrontFace({required this.entry});
+  const _FrontFace({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
     return _CardShell(
-      key: const ValueKey('front'),
       child: Text(
         entry.character,
         style: const TextStyle(fontSize: 96, height: 1.1),
@@ -57,19 +46,14 @@ class _FrontFace extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Back face — transliteration, pronunciation, example
-// ---------------------------------------------------------------------------
-
 class _BackFace extends StatelessWidget {
   final CardEntry entry;
-  const _BackFace({required this.entry});
+  const _BackFace({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return _CardShell(
-      key: const ValueKey('back'),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -90,14 +74,10 @@ class _BackFace extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Shared card shell
-// ---------------------------------------------------------------------------
-
 class _CardShell extends StatelessWidget {
   final Widget child;
 
-  const _CardShell({super.key, required this.child});
+  const _CardShell({required this.child});
 
   @override
   Widget build(BuildContext context) {

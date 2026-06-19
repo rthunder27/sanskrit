@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .flashcard-deck__controls {
@@ -14,4 +14,27 @@
 .flashcard-deck__counter {
   min-width: 4rem;
   text-align: center;
+}
+
+.flashcard-deck__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.flashcard-deck__stage {
+  width: 320px;
+  height: 230px;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+
+.flashcard-deck__card-enter {
+  animation: deck-card-enter 0.25s ease;
+}
+
+@keyframes deck-card-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
