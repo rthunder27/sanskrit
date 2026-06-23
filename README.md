@@ -24,7 +24,7 @@ Perhaps vocab and grammar after exploring these features, definitely 1, probably
     vowels and diphthongs; consonants in labeled varga rows (Gutturals,
     Palatals, Retroflexes, Dentals, Labials) with Semivowels and Sibilants
     displayed side-by-side below
-- [ ] Conjunct consonants (samyuktākṣara) — a curated deck of ~20-30 common
+- [x] Conjunct consonants (samyuktākṣara) — a curated deck of 25 common
       conjunct ligatures; card front shows the conjunct, back shows which
       consonants combine to form it, transliteration, and example word
 - [ ] Touch-screen character drawing practice (feature 2)
