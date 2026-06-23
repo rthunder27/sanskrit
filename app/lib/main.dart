@@ -10,7 +10,7 @@ import 'screens/quiz_screen.dart';
 import 'screens/chart_screen.dart';
 import 'screens/review_screen.dart';
 
-const String appBuildId = '20250619d';
+const String appBuildId = '20260623a';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,7 +86,7 @@ class _HomeShellState extends State<_HomeShell> {
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
+          preferredSize: const Size.fromHeight(84),
           child: _DeckSelector(
             selected: _deckKey,
             onChanged: (key) => setState(() => _deckKey = key),
@@ -118,21 +118,65 @@ class _DeckSelector extends StatelessWidget {
 
   const _DeckSelector({required this.selected, required this.onChanged});
 
+  static const _labels = {
+    DeckKey.vowels: 'Vowels',
+    DeckKey.consonants: 'Consonants',
+    DeckKey.conjuncts: 'Conjuncts',
+    DeckKey.all: 'All',
+  };
+
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final keys = DeckKey.values;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-      child: SegmentedButton<DeckKey>(
-        segments: const [
-          ButtonSegment(value: DeckKey.vowels, label: Text('Vowels')),
-          ButtonSegment(value: DeckKey.consonants, label: Text('Consonants')),
-          ButtonSegment(value: DeckKey.all, label: Text('All')),
+      child: Column(
+        children: [
+          for (var row = 0; row < 2; row++)
+            Row(
+              children: [
+                for (var col = 0; col < 2; col++)
+                  Expanded(
+                    child: _buildChip(keys[row * 2 + col], colorScheme),
+                  ),
+              ],
+            ),
         ],
-        selected: {selected},
-        onSelectionChanged: (s) => onChanged(s.first),
-        style: const ButtonStyle(
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          visualDensity: VisualDensity.compact,
+      ),
+    );
+  }
+
+  Widget _buildChip(DeckKey key, ColorScheme colorScheme) {
+    final isSelected = key == selected;
+    return Padding(
+      padding: const EdgeInsets.all(2),
+      child: Material(
+        color: isSelected ? colorScheme.secondaryContainer : Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: isSelected ? colorScheme.primary : colorScheme.outline,
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => onChanged(key),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: Center(
+              child: Text(
+                _labels[key]!,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                  color: isSelected
+                      ? colorScheme.onSecondaryContainer
+                      : colorScheme.onSurface,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

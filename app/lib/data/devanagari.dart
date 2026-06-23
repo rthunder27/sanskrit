@@ -167,6 +167,38 @@ const List<CardEntry> consonants = [
 ];
 
 // ---------------------------------------------------------------------------
+// Conjunct consonants (samyuktākṣara)
+// ---------------------------------------------------------------------------
+
+const List<CardEntry> conjuncts = [
+  CardEntry(character: 'क्ष', transliteration: 'kṣa', pronunciation: 'क् (k) + ष (ṣ)', example: ExampleWord(word: 'राक्षस', transliteration: 'rākṣasa', meaning: 'demon')),
+  CardEntry(character: 'ज्ञ', transliteration: 'jña', pronunciation: 'ज् (j) + ञ (ñ)', example: ExampleWord(word: 'यज्ञ', transliteration: 'yajña', meaning: 'sacrifice')),
+  CardEntry(character: 'श्र', transliteration: 'śra', pronunciation: 'श् (ś) + र (r)', example: ExampleWord(word: 'श्रुति', transliteration: 'śruti', meaning: 'scripture')),
+  CardEntry(character: 'त्र', transliteration: 'tra', pronunciation: 'त् (t) + र (r)', example: ExampleWord(word: 'मित्र', transliteration: 'mitra', meaning: 'friend')),
+  CardEntry(character: 'क्त', transliteration: 'kta', pronunciation: 'क् (k) + त (t)', example: ExampleWord(word: 'भक्ति', transliteration: 'bhakti', meaning: 'devotion')),
+  CardEntry(character: 'स्त', transliteration: 'sta', pronunciation: 'स् (s) + त (t)', example: ExampleWord(word: 'नमस्ते', transliteration: 'namaste', meaning: 'greeting of respect')),
+  CardEntry(character: 'स्थ', transliteration: 'stha', pronunciation: 'स् (s) + थ (th)', example: ExampleWord(word: 'स्थान', transliteration: 'sthāna', meaning: 'place')),
+  CardEntry(character: 'न्त', transliteration: 'nta', pronunciation: 'न् (n) + त (t)', example: ExampleWord(word: 'शान्ति', transliteration: 'śānti', meaning: 'peace')),
+  CardEntry(character: 'न्द', transliteration: 'nda', pronunciation: 'न् (n) + द (d)', example: ExampleWord(word: 'आनन्द', transliteration: 'ānanda', meaning: 'bliss')),
+  CardEntry(character: 'न्ध', transliteration: 'ndha', pronunciation: 'न् (n) + ध (dh)', example: ExampleWord(word: 'बन्ध', transliteration: 'bandha', meaning: 'bond')),
+  CardEntry(character: 'ण्ड', transliteration: 'ṇḍa', pronunciation: 'ण् (ṇ) + ड (ḍ)', example: ExampleWord(word: 'खण्ड', transliteration: 'khaṇḍa', meaning: 'section')),
+  CardEntry(character: 'ङ्ग', transliteration: 'ṅga', pronunciation: 'ङ् (ṅ) + ग (g)', example: ExampleWord(word: 'अङ्ग', transliteration: 'aṅga', meaning: 'limb')),
+  CardEntry(character: 'ञ्च', transliteration: 'ñca', pronunciation: 'ञ् (ñ) + च (c)', example: ExampleWord(word: 'पञ्च', transliteration: 'pañca', meaning: 'five')),
+  CardEntry(character: 'ष्ट', transliteration: 'ṣṭa', pronunciation: 'ष् (ṣ) + ट (ṭ)', example: ExampleWord(word: 'कष्ट', transliteration: 'kaṣṭa', meaning: 'hardship')),
+  CardEntry(character: 'द्ध', transliteration: 'ddha', pronunciation: 'द् (d) + ध (dh)', example: ExampleWord(word: 'बुद्ध', transliteration: 'buddha', meaning: 'awakened one')),
+  CardEntry(character: 'द्य', transliteration: 'dya', pronunciation: 'द् (d) + य (y)', example: ExampleWord(word: 'विद्या', transliteration: 'vidyā', meaning: 'knowledge')),
+  CardEntry(character: 'त्त', transliteration: 'tta', pronunciation: 'त् (t) + त (t)', example: ExampleWord(word: 'चित्त', transliteration: 'citta', meaning: 'mind')),
+  CardEntry(character: 'प्र', transliteration: 'pra', pronunciation: 'प् (p) + र (r)', example: ExampleWord(word: 'प्रकाश', transliteration: 'prakāśa', meaning: 'light')),
+  CardEntry(character: 'ब्र', transliteration: 'bra', pronunciation: 'ब् (b) + र (r)', example: ExampleWord(word: 'ब्रह्मन्', transliteration: 'brahman', meaning: 'the absolute')),
+  CardEntry(character: 'ग्र', transliteration: 'gra', pronunciation: 'ग् (g) + र (r)', example: ExampleWord(word: 'ग्राम', transliteration: 'grāma', meaning: 'village')),
+  CardEntry(character: 'द्र', transliteration: 'dra', pronunciation: 'द् (d) + र (r)', example: ExampleWord(word: 'इन्द्र', transliteration: 'indra', meaning: 'king of gods')),
+  CardEntry(character: 'स्व', transliteration: 'sva', pronunciation: 'स् (s) + व (v)', example: ExampleWord(word: 'स्वर', transliteration: 'svara', meaning: 'sound')),
+  CardEntry(character: 'त्व', transliteration: 'tva', pronunciation: 'त् (t) + व (v)', example: ExampleWord(word: 'तत्त्व', transliteration: 'tattva', meaning: 'truth/element')),
+  CardEntry(character: 'द्व', transliteration: 'dva', pronunciation: 'द् (d) + व (v)', example: ExampleWord(word: 'द्वार', transliteration: 'dvāra', meaning: 'door')),
+  CardEntry(character: 'श्व', transliteration: 'śva', pronunciation: 'श् (ś) + व (v)', example: ExampleWord(word: 'अश्व', transliteration: 'aśva', meaning: 'horse')),
+];
+
+// ---------------------------------------------------------------------------
 // Combined deck
 // ---------------------------------------------------------------------------
 
@@ -177,12 +209,13 @@ final List<CardEntry> all = [...vowels, ...consonants];
 // ---------------------------------------------------------------------------
 
 /// All available deck identifiers.
-enum DeckKey { vowels, consonants, all }
+enum DeckKey { vowels, consonants, conjuncts, all }
 
 /// Returns the flat entry list for a given deck.
 List<CardEntry> deckEntries(DeckKey key) => switch (key) {
       DeckKey.vowels => vowels,
       DeckKey.consonants => consonants,
+      DeckKey.conjuncts => conjuncts,
       DeckKey.all => all,
     };
 
@@ -206,8 +239,17 @@ final List<CardGroup> consonantGroups = [
   CardGroup(label: 'Sibilants',   entries: consonants.sublist(29, 33), paired: true),
 ];
 
+final List<CardGroup> conjunctGroups = [
+  CardGroup(label: 'Special ligatures',  entries: conjuncts.sublist(0, 2)),
+  CardGroup(label: 'Sub-र ligatures',    entries: [conjuncts[3], conjuncts[2], conjuncts[17], conjuncts[18], conjuncts[19], conjuncts[20]]),
+  CardGroup(label: 'Sibilant clusters',  entries: [conjuncts[5], conjuncts[6], conjuncts[21], conjuncts[13], conjuncts[24]]),
+  CardGroup(label: 'Nasal clusters',     entries: [conjuncts[7], conjuncts[8], conjuncts[9], conjuncts[10], conjuncts[11], conjuncts[12]]),
+  CardGroup(label: 'Other clusters',     entries: [conjuncts[4], conjuncts[14], conjuncts[15], conjuncts[16], conjuncts[22], conjuncts[23]]),
+];
+
 final Map<DeckKey, List<CardGroup>> deckGroups = {
   DeckKey.vowels:     vowelGroups,
   DeckKey.consonants: consonantGroups,
+  DeckKey.conjuncts:  conjunctGroups,
   DeckKey.all:        [...vowelGroups, ...consonantGroups],
 };

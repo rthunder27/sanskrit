@@ -294,6 +294,160 @@ export const consonants = [
   },
 ]
 
+/** @type {FlashcardEntry[]} */
+export const conjuncts = [
+  {
+    character: 'क्ष',
+    transliteration: 'kṣa',
+    pronunciation: 'क् (k) + ष (ṣ)',
+    example: { word: 'राक्षस', transliteration: 'rākṣasa', meaning: 'demon' },
+  },
+  {
+    character: 'ज्ञ',
+    transliteration: 'jña',
+    pronunciation: 'ज् (j) + ञ (ñ)',
+    example: { word: 'यज्ञ', transliteration: 'yajña', meaning: 'sacrifice' },
+  },
+  {
+    character: 'श्र',
+    transliteration: 'śra',
+    pronunciation: 'श् (ś) + र (r)',
+    example: { word: 'श्रुति', transliteration: 'śruti', meaning: 'scripture' },
+  },
+  {
+    character: 'त्र',
+    transliteration: 'tra',
+    pronunciation: 'त् (t) + र (r)',
+    example: { word: 'मित्र', transliteration: 'mitra', meaning: 'friend' },
+  },
+  {
+    character: 'क्त',
+    transliteration: 'kta',
+    pronunciation: 'क् (k) + त (t)',
+    example: { word: 'भक्ति', transliteration: 'bhakti', meaning: 'devotion' },
+  },
+  {
+    character: 'स्त',
+    transliteration: 'sta',
+    pronunciation: 'स् (s) + त (t)',
+    example: { word: 'नमस्ते', transliteration: 'namaste', meaning: 'greeting of respect' },
+  },
+  {
+    character: 'स्थ',
+    transliteration: 'stha',
+    pronunciation: 'स् (s) + थ (th)',
+    example: { word: 'स्थान', transliteration: 'sthāna', meaning: 'place' },
+  },
+  {
+    character: 'न्त',
+    transliteration: 'nta',
+    pronunciation: 'न् (n) + त (t)',
+    example: { word: 'शान्ति', transliteration: 'śānti', meaning: 'peace' },
+  },
+  {
+    character: 'न्द',
+    transliteration: 'nda',
+    pronunciation: 'न् (n) + द (d)',
+    example: { word: 'आनन्द', transliteration: 'ānanda', meaning: 'bliss' },
+  },
+  {
+    character: 'न्ध',
+    transliteration: 'ndha',
+    pronunciation: 'न् (n) + ध (dh)',
+    example: { word: 'बन्ध', transliteration: 'bandha', meaning: 'bond' },
+  },
+  {
+    character: 'ण्ड',
+    transliteration: 'ṇḍa',
+    pronunciation: 'ण् (ṇ) + ड (ḍ)',
+    example: { word: 'खण्ड', transliteration: 'khaṇḍa', meaning: 'section' },
+  },
+  {
+    character: 'ङ्ग',
+    transliteration: 'ṅga',
+    pronunciation: 'ङ् (ṅ) + ग (g)',
+    example: { word: 'अङ्ग', transliteration: 'aṅga', meaning: 'limb' },
+  },
+  {
+    character: 'ञ्च',
+    transliteration: 'ñca',
+    pronunciation: 'ञ् (ñ) + च (c)',
+    example: { word: 'पञ्च', transliteration: 'pañca', meaning: 'five' },
+  },
+  {
+    character: 'ष्ट',
+    transliteration: 'ṣṭa',
+    pronunciation: 'ष् (ṣ) + ट (ṭ)',
+    example: { word: 'कष्ट', transliteration: 'kaṣṭa', meaning: 'hardship' },
+  },
+  {
+    character: 'द्ध',
+    transliteration: 'ddha',
+    pronunciation: 'द् (d) + ध (dh)',
+    example: { word: 'बुद्ध', transliteration: 'buddha', meaning: 'awakened one' },
+  },
+  {
+    character: 'द्य',
+    transliteration: 'dya',
+    pronunciation: 'द् (d) + य (y)',
+    example: { word: 'विद्या', transliteration: 'vidyā', meaning: 'knowledge' },
+  },
+  {
+    character: 'त्त',
+    transliteration: 'tta',
+    pronunciation: 'त् (t) + त (t)',
+    example: { word: 'चित्त', transliteration: 'citta', meaning: 'mind' },
+  },
+  {
+    character: 'प्र',
+    transliteration: 'pra',
+    pronunciation: 'प् (p) + र (r)',
+    example: { word: 'प्रकाश', transliteration: 'prakāśa', meaning: 'light' },
+  },
+  {
+    character: 'ब्र',
+    transliteration: 'bra',
+    pronunciation: 'ब् (b) + र (r)',
+    example: { word: 'ब्रह्मन्', transliteration: 'brahman', meaning: 'the absolute' },
+  },
+  {
+    character: 'ग्र',
+    transliteration: 'gra',
+    pronunciation: 'ग् (g) + र (r)',
+    example: { word: 'ग्राम', transliteration: 'grāma', meaning: 'village' },
+  },
+  {
+    character: 'द्र',
+    transliteration: 'dra',
+    pronunciation: 'द् (d) + र (r)',
+    example: { word: 'इन्द्र', transliteration: 'indra', meaning: 'king of gods' },
+  },
+  {
+    character: 'स्व',
+    transliteration: 'sva',
+    pronunciation: 'स् (s) + व (v)',
+    example: { word: 'स्वर', transliteration: 'svara', meaning: 'sound' },
+  },
+  {
+    character: 'त्व',
+    transliteration: 'tva',
+    pronunciation: 'त् (t) + व (v)',
+    example: { word: 'तत्त्व', transliteration: 'tattva', meaning: 'truth/element' },
+  },
+  {
+    character: 'द्व',
+    transliteration: 'dva',
+    pronunciation: 'द् (d) + व (v)',
+    example: { word: 'द्वार', transliteration: 'dvāra', meaning: 'door' },
+  },
+  {
+    character: 'श्व',
+    transliteration: 'śva',
+    pronunciation: 'श् (ś) + व (v)',
+    example: { word: 'अश्व', transliteration: 'aśva', meaning: 'horse' },
+  },
+]
+
 /** All vowels followed by all consonants, for a combined study session. @type {FlashcardEntry[]} */
 export const all = [...vowels, ...consonants]
 
@@ -305,6 +459,7 @@ export const all = [...vowels, ...consonants]
 export const decks = {
   vowels,
   consonants,
+  conjuncts,
   all,
 }
 
@@ -343,6 +498,18 @@ export const vowelGroups = [
 ]
 
 /**
+ * Conjuncts organised by formation pattern.
+ * @type {CharGroup[]}
+ */
+export const conjunctGroups = [
+  { label: 'Special ligatures',  entries: conjuncts.slice(0, 2) },
+  { label: 'Sub-र ligatures',    entries: conjuncts.filter(c => ['त्र','श्र','प्र','ब्र','ग्र','द्र'].includes(c.character)) },
+  { label: 'Sibilant clusters',  entries: conjuncts.filter(c => ['स्त','स्थ','स्व','ष्ट','श्व'].includes(c.character)) },
+  { label: 'Nasal clusters',     entries: conjuncts.filter(c => ['न्त','न्द','न्ध','ण्ड','ङ्ग','ञ्च'].includes(c.character)) },
+  { label: 'Other clusters',     entries: conjuncts.filter(c => ['क्त','द्ध','द्य','त्त','त्व','द्व'].includes(c.character)) },
+]
+
+/**
  * Groups to use in the reference chart for each deck.
  * Vowels are split into simple/diphthong rows; consonants use the structured
  * varga grouping; all combines both.
@@ -351,5 +518,6 @@ export const vowelGroups = [
 export const deckGroups = {
   vowels: vowelGroups,
   consonants: consonantGroups,
+  conjuncts: conjunctGroups,
   all: [...vowelGroups, ...consonantGroups],
 }

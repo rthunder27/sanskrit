@@ -9,6 +9,7 @@ import './App.css'
 const deckLabels = {
   vowels: 'Vowels',
   consonants: 'Consonants',
+  conjuncts: 'Conjuncts',
   all: 'All',
 }
 
