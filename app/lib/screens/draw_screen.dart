@@ -38,7 +38,38 @@ class _DrawScreenState extends State<DrawScreen> {
   List<_CalMarker> _calMarkers = [];
   int? _selectedMarker;
 
+  // Saved calibration data loaded from file
+  Map<String, List<StrokeGuide>> _savedGuides = {};
+
   List<CardEntry> get _available => widget.entries;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCalibrationData();
+  }
+
+  Future<void> _loadCalibrationData() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/stroke_calibration.json');
+    if (!await file.exists()) return;
+    try {
+      final list = jsonDecode(await file.readAsString()) as List<dynamic>;
+      final map = <String, List<StrokeGuide>>{};
+      for (final entry in list) {
+        final char = entry['character'] as String;
+        final strokes = (entry['strokes'] as List<dynamic>)
+            .map((s) => StrokeGuide(
+                  (s['x'] as num).toDouble(),
+                  (s['y'] as num).toDouble(),
+                  (s['angle'] as num).toDouble(),
+                ))
+            .toList();
+        map[char] = strokes;
+      }
+      if (mounted) setState(() => _savedGuides = map);
+    } catch (_) {}
+  }
 
   @override
   void didUpdateWidget(covariant DrawScreen oldWidget) {
@@ -192,6 +223,13 @@ class _DrawScreenState extends State<DrawScreen> {
 
     await file.writeAsString(const JsonEncoder.withIndent('  ').convert(existing));
 
+    // Update in-memory guides so guided mode reflects changes immediately
+    setState(() {
+      _savedGuides[char] = _calMarkers
+          .map((m) => StrokeGuide(m.x, m.y, m.angle.toDouble()))
+          .toList();
+    });
+
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -226,7 +264,7 @@ class _DrawScreenState extends State<DrawScreen> {
     }
 
     final character = _entry.character;
-    final guides = strokeGuides[character];
+    final guides = _savedGuides[character] ?? strokeGuides[character];
     final showGuide = _calibrating || _subMode == DrawSubMode.guided || _subMode == DrawSubMode.unguided;
     final showArrows = !_calibrating && _subMode == DrawSubMode.guided;
 
@@ -321,8 +359,16 @@ class _DrawScreenState extends State<DrawScreen> {
               onPressed: () => setState(() {
                 _calibrating = !_calibrating;
                 if (_calibrating) {
-                  _calMarkers = [];
-                  _selectedMarker = null;
+                  final existing = _savedGuides[_entry.character] ?? strokeGuides[_entry.character];
+                  if (existing != null) {
+                    _calMarkers = existing
+                        .map((g) => _CalMarker(x: g.x, y: g.y, angle: g.angle.round()))
+                        .toList();
+                    _selectedMarker = _calMarkers.isNotEmpty ? 0 : null;
+                  } else {
+                    _calMarkers = [];
+                    _selectedMarker = null;
+                  }
                 }
               }),
               style: TextButton.styleFrom(
