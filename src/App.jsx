@@ -2,6 +2,7 @@ import { useState } from 'react'
 import FlashcardDeck from './components/FlashcardDeck'
 import FlashcardQuiz from './components/FlashcardQuiz'
 import ReferenceChart from './components/ReferenceChart'
+import DrawingPractice from './components/DrawingPractice'
 import { decks, deckGroups } from './data/devanagari'
 import './App.css'
 
@@ -25,7 +26,7 @@ const deckLabels = {
  */
 function App() {
   const [deckKey, setDeckKey] = useState('vowels')
-  const [mode, setMode] = useState('browse') // 'browse' | 'quiz' | 'chart'
+  const [mode, setMode] = useState('browse') // 'browse' | 'quiz' | 'chart' | 'draw'
 
   const switchDeck = (key) => {
     setDeckKey(key)
@@ -66,11 +67,18 @@ function App() {
         >
           Chart
         </button>
+        <button
+          className={mode === 'draw' ? 'mode-selector__button--active' : ''}
+          onClick={() => setMode('draw')}
+        >
+          Draw
+        </button>
       </div>
 
       {mode === 'browse' && <FlashcardDeck key={deckKey} entries={decks[deckKey]} />}
       {mode === 'quiz' && <FlashcardQuiz key={deckKey} entries={decks[deckKey]} onExit={() => setMode('browse')} />}
       {mode === 'chart' && <ReferenceChart groups={deckGroups[deckKey]} />}
+      {mode === 'draw' && <DrawingPractice key={deckKey} entries={decks[deckKey]} />}
     </div>
   )
 }

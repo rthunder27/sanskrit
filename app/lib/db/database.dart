@@ -4,11 +4,13 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 const String _boxName = 'review_records';
+const String _drawBoxName = 'draw_records';
 
 /// Initialises Hive storage. Call once at app start before accessing the DB.
 Future<void> initDatabase() async {
   await Hive.initFlutter();
   await Hive.openBox<Map>(_boxName);
+  await Hive.openBox<Map>(_drawBoxName);
 }
 
 // ---------------------------------------------------------------------------
@@ -94,6 +96,65 @@ class AppDatabase {
   /// Returns the set of all characters that have been reviewed.
   Set<String> getSeenCharacters() =>
       _box.keys.cast<String>().toSet();
+
+  // -- Draw records ---------------------------------------------------------
+
+  Box<Map> get _drawBox => Hive.box<Map>(_drawBoxName);
+
+  DrawRecord? getDrawRecord(String character, String subMode) {
+    final key = '$character|$subMode';
+    final map = _drawBox.get(key);
+    return map == null ? null : DrawRecord.fromMap(key, map);
+  }
+
+  Future<void> upsertDrawRecord(DrawRecord record) =>
+      _drawBox.put(record._key, record.toMap());
+
+  List<DrawRecord> getAllDrawRecords() => _drawBox.keys
+      .map((k) => DrawRecord.fromMap(k as String, _drawBox.get(k)!))
+      .toList();
+}
+
+// ---------------------------------------------------------------------------
+// DrawRecord — tracks drawing practice attempts per character + sub-mode
+// ---------------------------------------------------------------------------
+
+class DrawRecord {
+  final String character;
+  final String subMode;
+  int attemptCount;
+  int passCount;
+  double bestAccuracy;
+  int lastAttemptDay;
+
+  DrawRecord({
+    required this.character,
+    required this.subMode,
+    this.attemptCount = 0,
+    this.passCount = 0,
+    this.bestAccuracy = 0.0,
+    this.lastAttemptDay = 0,
+  });
+
+  factory DrawRecord.fromMap(String key, Map map) => DrawRecord(
+        character: map['character'] as String? ?? key.split('|')[0],
+        subMode: map['subMode'] as String? ?? key.split('|')[1],
+        attemptCount: map['attemptCount'] as int? ?? 0,
+        passCount: map['passCount'] as int? ?? 0,
+        bestAccuracy: (map['bestAccuracy'] as num?)?.toDouble() ?? 0.0,
+        lastAttemptDay: map['lastAttemptDay'] as int? ?? 0,
+      );
+
+  String get _key => '$character|$subMode';
+
+  Map<String, dynamic> toMap() => {
+        'character': character,
+        'subMode': subMode,
+        'attemptCount': attemptCount,
+        'passCount': passCount,
+        'bestAccuracy': bestAccuracy,
+        'lastAttemptDay': lastAttemptDay,
+      };
 }
 
 // ---------------------------------------------------------------------------

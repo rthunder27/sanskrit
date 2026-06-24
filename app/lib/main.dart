@@ -9,8 +9,9 @@ import 'screens/browse_screen.dart';
 import 'screens/quiz_screen.dart';
 import 'screens/chart_screen.dart';
 import 'screens/review_screen.dart';
+import 'screens/draw_screen.dart';
 
-const String appBuildId = '20260623a';
+const String appBuildId = '20260623b';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,6 +71,7 @@ class _HomeShellState extends State<_HomeShell> {
         1 => QuizScreen(entries: _entries),
         2 => ChartScreen(groups: _groups),
         3 => ReviewScreen(entries: _entries, db: _db),
+        4 => DrawScreen(entries: _entries, db: _db),
         _ => const SizedBox.shrink(),
       };
 
@@ -102,6 +104,7 @@ class _HomeShellState extends State<_HomeShell> {
           NavigationDestination(icon: Icon(Icons.quiz), label: 'Quiz'),
           NavigationDestination(icon: Icon(Icons.grid_view), label: 'Chart'),
           NavigationDestination(icon: Icon(Icons.repeat), label: 'Review'),
+          NavigationDestination(icon: Icon(Icons.draw), label: 'Draw'),
         ],
       ),
     );

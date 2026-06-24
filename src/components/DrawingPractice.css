@@ -1,0 +1,142 @@
+.drawing-practice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.drawing-practice__modes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.drawing-practice__modes button {
+  font-size: 0.85rem;
+  padding: 0.35em 0.8em;
+}
+
+.drawing-practice__mode--active {
+  border-color: #646cff;
+}
+
+.drawing-practice__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.drawing-practice__counter {
+  min-width: 4rem;
+  text-align: center;
+}
+
+.drawing-practice__reference {
+  font-size: 5rem;
+  line-height: 1;
+  min-height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawing-practice__label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #888;
+}
+
+.drawing-practice__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.drawing-practice__score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.drawing-practice__score--pass {
+  color: #38a169;
+}
+
+.drawing-practice__score--fail {
+  color: #e53e3e;
+}
+
+.drawing-practice__calibrate {
+  font-size: 0.75rem;
+  padding: 0.25em 0.6em;
+  opacity: 0.5;
+}
+
+.drawing-practice__calibrate--active {
+  opacity: 1;
+  border-color: #e53e3e;
+  color: #e53e3e;
+}
+
+.drawing-practice__cal-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 300px;
+  font-size: 0.85rem;
+}
+
+.drawing-practice__cal-hint {
+  margin: 0;
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.drawing-practice__cal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.drawing-practice__cal-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(220, 60, 60, 0.85);
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.drawing-practice__cal-num--selected {
+  outline: 2px solid #fff;
+  box-shadow: 0 0 0 3px rgba(220, 60, 60, 0.5);
+}
+
+.drawing-practice__cal-pos {
+  color: #888;
+  min-width: 5rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.drawing-practice__cal-row input[type="range"] {
+  flex: 1;
+}
+
+.drawing-practice__cal-angle {
+  min-width: 2.5rem;
+  text-align: right;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.drawing-practice__cal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
